@@ -1,0 +1,14 @@
+name: darky-core
+
+services:
+  whatpony-bot:
+    container_name: whatpony-bot
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - darky-network
+
+networks:
+  darky-network:
+    attachable: true
