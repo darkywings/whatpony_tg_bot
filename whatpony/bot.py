@@ -13,13 +13,12 @@ from aiogram.types import (
     InlineQuery,
     InlineKeyboardMarkup,
     InlineKeyboardButton,
-    InlineQueryResultPhoto,
     InlineQueryResultArticle,
     InputTextMessageContent,
     Message
 )
 
-from pony_type import _ponies, Pony
+from pony_type import _ponies
 
 dotenv.load_dotenv()
 
