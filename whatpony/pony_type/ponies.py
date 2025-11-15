@@ -398,14 +398,14 @@ _ponies = [
     ),
     Message(
         message = ":>",
-        image_url = "https://i.imgur.com/Oxpw6AF.png"
+        image_url = "https://i.ibb.co/PGx9zzHN/2025-11-16-013213892.png"
     ),
     Message(
         message = ":>",
-        image_url="https://i.imgur.com/jL0aKjF.png"
+        image_url="https://i.ibb.co/NgkjMkp1/2025-11-16-013316265.png"
     ),
     Message(
         message = ":>",
-        image_url="https://i.imgur.com/zkn3o7q.png"
+        image_url="https://i.ibb.co/4RQ3mDK5/2025-11-16-013334286.png"
     ),
 ]
