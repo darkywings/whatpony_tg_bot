@@ -18,7 +18,7 @@ from aiogram.types import (
     Message
 )
 
-from pony_type import _ponies, Pony
+from pony_type import _ponies, _easter_eggs, Pony
 from pony_type import Message as PonyTypeMessage
 
 dotenv.load_dotenv()
@@ -94,10 +94,14 @@ async def get_pony(index: str = None):
 
     _selected_pony = random.choice(_ponies)
 
+    if random.randint(0, 1000) == 1:
+        _selected_pony = random.choice(_easter_eggs)
+
     if index:
-        if not index.lstrip("-").isdigit() or abs(int(index)) not in range(len(_ponies)):
-            return "⚠️Unable to use index because of the query format"
-        _selected_pony = _ponies[int(index)]
+        if not index.lstrip("-").isdigit() or abs(int(index)) >= max([len(_ponies), len(_easter_eggs)]):
+            return ("⚠️Unable to use index because of the query format", "")
+        if int(index) > 0: _selected_pony = _ponies[abs(int(index))-1]
+        elif int(index) < 0: _selected_pony = _easter_eggs[abs(int(index))-1]
     
     if isinstance(_selected_pony, Pony):
         return (f"🎉 Твоя пони-личность: \n{_selected_pony.get()}", _selected_pony.getImg())
@@ -106,7 +110,7 @@ async def get_pony(index: str = None):
         return (_selected_pony.getMessage(), _selected_pony.getImg()) 
 
 async def main():
-    logger.info("Started")
+    logger.info(f"Started with {len(_ponies)} ponies")
     dp.include_router(router)
     await dp.start_polling(bot)
 

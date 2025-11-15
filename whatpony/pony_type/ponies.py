@@ -386,6 +386,9 @@ _ponies = [
         image_url = "https://derpicdn.net/img/view/2012/7/6/34717.gif"
     ),
     # Pony(name="Dering Doo", description=[...], image_url=None)
+]
+
+_easter_eggs = [
     Pony(
         name = "???",
         description = [
