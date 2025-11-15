@@ -95,7 +95,7 @@ async def get_pony(index: str = None):
     _selected_pony = random.choice(_ponies)
 
     if index:
-        if not index.isdigit() or abs(int(index)) not in range(len(_ponies)):
+        if not index.lstrip("-").isdigit() or abs(int(index)) not in range(len(_ponies)):
             return "⚠️Unable to use index because of the query format"
         _selected_pony = _ponies[int(index)]
     
