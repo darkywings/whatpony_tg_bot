@@ -97,7 +97,7 @@ async def get_pony(index: str = None):
     if index:
         if not index.isdigit() or abs(int(index)) not in range(len(_ponies)):
             return "⚠️Unable to use index because of the query format"
-        _selected_pony = _ponies[index]
+        _selected_pony = _ponies[int[index]]
     
     if isinstance(_selected_pony, Pony):
         return (f"🎉 Твоя пони-личность: \n{_selected_pony.get()}", _selected_pony.getImg())
