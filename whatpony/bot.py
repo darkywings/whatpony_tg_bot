@@ -18,7 +18,8 @@ from aiogram.types import (
     Message
 )
 
-from pony_type import _ponies
+from pony_type import _ponies, Pony
+from pony_type import Message as PonyTypeMessage
 
 dotenv.load_dotenv()
 
@@ -70,7 +71,9 @@ async def start(message: Message):
 
 @router.inline_query()
 async def inline_handler(inline_query: InlineQuery):
-    _selected_pony: tuple[str, str] = await get_pony()
+    
+    _selected_pony: tuple[str, str] = await get_pony(inline_query.query)
+
     results = [
         InlineQueryResultArticle(
             id="1",
@@ -87,10 +90,20 @@ async def inline_handler(inline_query: InlineQuery):
     await inline_query.answer(results,
                               cache_time=1)
 
-async def get_pony():
+async def get_pony(index: str = None):
 
     _selected_pony = random.choice(_ponies)
-    return (f"🎉 Твоя пони-личность: \n{_selected_pony.get()}", _selected_pony.getImg())
+
+    if index:
+        if not index.isdigit() or abs(int(index)) not in range(len(_ponies)):
+            return "⚠️Unable to use index because of the query format"
+        _selected_pony = _ponies[index]
+    
+    if isinstance(_selected_pony, Pony):
+        return (f"🎉 Твоя пони-личность: \n{_selected_pony.get()}", _selected_pony.getImg())
+    
+    if isinstance(_selected_pony, PonyTypeMessage):
+        return (_selected_pony.getMessage(), _selected_pony.getImg()) 
 
 async def main():
     logger.info("Started")
