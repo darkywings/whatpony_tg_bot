@@ -40,12 +40,12 @@ class Pony:
 class Message:
     '''Базовый класс для отправки обычного сообщения'''
     def __init__(self,
-                 message: str = "",
+                 message: str,
                  image_url: str | None = None) -> None:
         '''
         Базовый класс для отправки обычного сообщения
 
-        :param message: Текст сообщения(опционально, если image_url не передан)
+        :param message: Текст сообщения
         :type message: str
 
         :param image_url: URL прикрепляемого изображения(опционально)

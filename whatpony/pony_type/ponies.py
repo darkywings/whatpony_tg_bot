@@ -397,12 +397,15 @@ _ponies = [
         image_url = "https://derpicdn.net/img/view/2013/3/20/275505.gif",
     ),
     Message(
-        image_url="https://imgur.com/Oxpw6AF"
+        message = ":>",
+        image_url = "https://imgur.com/Oxpw6AF"
     ),
     Message(
+        message = ":>",
         image_url="https://imgur.com/jL0aKjF"
     ),
     Message(
+        message = ":>",
         image_url="https://imgur.com/zkn3o7q"
     ),
 ]
