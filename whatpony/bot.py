@@ -4,7 +4,6 @@ import os
 import dotenv
 import logging
 from logging import Formatter
-import random
 
 from aiogram import Router, Bot, Dispatcher
 from aiogram.filters import CommandStart
@@ -18,8 +17,8 @@ from aiogram.types import (
     Message
 )
 
-from pony_type import _ponies, _easter_eggs, Pony
-from pony_type import Message as PonyTypeMessage
+from pony_type import _ponies, Pony
+from utils.randomizer import PonyRandomizer
 
 dotenv.load_dotenv()
 
@@ -48,6 +47,8 @@ LOGGER_CONFIG = {
 logger = logging.getLogger("whatpony-bot")
 logging.config.dictConfig(LOGGER_CONFIG)
 
+ponyRand = PonyRandomizer(_ponies)
+
 bot = Bot(token=os.getenv("BOT_TOKEN"))
 dp = Dispatcher()
 router = Router()
@@ -56,7 +57,9 @@ keyboard = InlineKeyboardMarkup(
     inline_keyboard=[
         [
             InlineKeyboardButton(text="Какая ты пони",
-                                 switch_inline_query_current_chat="")
+                                 switch_inline_query_current_chat=""),
+            InlineKeyboardButton(text="Поделиться",
+                                 switch_inline_query=""),
         ]
     ]
 )
@@ -92,22 +95,15 @@ async def inline_handler(inline_query: InlineQuery):
 
 async def get_pony(index: str = None):
 
-    _selected_pony = random.choice(_ponies)
-
-    if random.randint(0, 1000) == 1:
-        _selected_pony = random.choice(_easter_eggs)
-
-    if index:
-        if not index.lstrip("-").isdigit() or abs(int(index)) >= max([len(_ponies), len(_easter_eggs)]):
-            return ("⚠️Unable to use index because of the query format", "")
-        if int(index) > 0: _selected_pony = _ponies[abs(int(index))-1]
-        elif int(index) < 0: _selected_pony = _easter_eggs[abs(int(index))-1]
+    _selected_pony = ponyRand.get_pony(index)
     
     if isinstance(_selected_pony, Pony):
+        if _selected_pony.isMessageOnly():
+            return (_selected_pony.getMessage(), _selected_pony.getImg())
         return (f"🎉 Твоя пони-личность: \n{_selected_pony.get()}", _selected_pony.getImg())
     
-    if isinstance(_selected_pony, PonyTypeMessage):
-        return (_selected_pony.getMessage(), _selected_pony.getImg()) 
+    if isinstance(_selected_pony, str):
+        return (_selected_pony, None)
 
 async def main():
     logger.info(f"Started with {len(_ponies)} ponies")
