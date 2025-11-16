@@ -452,6 +452,14 @@ _ponies = [
             "Не маленький, а компактный. 🤏",
         ],
         image_url = "https://d.furaffinity.net/art/darkywings/1735663452/1735663452.darkywings_%D1%81%D1%82%D0%BE%D0%BC%D0%BF_%D0%B4%D0%B0%D1%80%D0%BA%D0%B8_%D1%87%D0%B8%D1%81%D1%82%D0%BE%D0%B5.gif",
-        weight = 0.1
+        weight = 0.2
+    ),
+    Pony(
+        name = "💣 Сильвер",
+        description = [
+            "Делает смешные штуки, но никто не смеётся 😢",
+        ],
+        image_url = "https://i.ibb.co/6cpYg2tN/silver-Wiggle.gif",
+        weight = 0.5
     ),
 ]

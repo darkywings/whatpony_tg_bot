@@ -91,7 +91,7 @@ async def inline_handler(inline_query: InlineQuery):
         )
     ]
     await inline_query.answer(results,
-                              cache_time=1)
+                              cache_time=0)
 
 async def get_pony(index: str = None):
 
