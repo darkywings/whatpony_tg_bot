@@ -528,7 +528,7 @@ _ponies = [
             "Рофл, который вышел из под контроля.",
         ],
         image_url = "https://i.ibb.co/PG6tzq5M/6dpegasus8-1.png",
-        weight = 0.5
+        weight = 0.4
     ),
     Pony(
         name = "📙 Zarioly",
@@ -538,7 +538,7 @@ _ponies = [
             "100500 нарисованных спрайтов одной и той же понячьей жопы. 🎨🍑",
         ],
         image_url = "https://i.ibb.co/7JsQz4CP/2025-11-16-042136386.png",
-        weight = 0.5
+        weight = 0.4
     ),
     Pony(
         name = "🎀 Kamenь",
@@ -549,7 +549,7 @@ _ponies = [
             "Прячусь от каменщика 3 дня. Ы",
         ],
         image_url = "https://derpicdn.net/img/2025/10/7/3689236/large.gif",
-        weight = 0.5
+        weight = 0.4
     ),
     Pony(
         name = "🦋 Дарки",
@@ -563,7 +563,7 @@ _ponies = [
             "Милая крылатая тряпочка для пыли. 🥰💨",
         ],
         image_url = "https://d.furaffinity.net/art/darkywings/1735663452/1735663452.darkywings_%D1%81%D1%82%D0%BE%D0%BC%D0%BF_%D0%B4%D0%B0%D1%80%D0%BA%D0%B8_%D1%87%D0%B8%D1%81%D1%82%D0%BE%D0%B5.gif",
-        weight = 0.2
+        weight = 0.1
     ),
     Pony(
         name = "✨ Chrystal",
@@ -575,7 +575,7 @@ _ponies = [
             "Жуёт Дарки вместо жвачки. 🍬👄",
         ],
         image_url = "https://derpicdn.net/img/view/2025/8/8/3655668.png",
-        weight = 0.2
+        weight = 0.1
     ),
     Pony(
         name = "💣 Сильвер",
@@ -583,7 +583,7 @@ _ponies = [
             "Делает смешные штуки, но никто не смеётся 😢",
         ],
         image_url = "https://i.ibb.co/6cpYg2tN/silver-Wiggle.gif",
-        weight = 0.5
+        weight = 0.4
     ),
     Pony(
         name = "🌈 Оленедешка",
@@ -593,7 +593,7 @@ _ponies = [
             "Праздник к нам приходит\nВеселье приносит оленедешка наша\nСкитлса вкус всегда настоящий 🍬",
         ],
         image_url = "https://derpicdn.net/img/2025/9/8/3672771/large.png",
-        weight = 0.5
+        weight = 0.4
     ),
     Pony(
         name = "🍑 Grattatatata",
@@ -603,6 +603,6 @@ _ponies = [
             "Звучит как автоматная очередь. 🔥",
         ],
         image_url = "https://derpicdn.net/img/2020/12/5/2502593/large.jpg",
-        weight = 0.5
+        weight = 0.4
     )
 ]
