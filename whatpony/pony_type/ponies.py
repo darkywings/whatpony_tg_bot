@@ -499,7 +499,7 @@ _ponies = [
     Pony(
         name = "🤡 Мем",
         description = "На какую пони похожа?",
-        message = ":>",
+        message = "На какую пони похожа? Тебе не надоело. Ты похожа на говно",
         message_only = True,
         weight = 0.05,
         image_url = "https://i.ibb.co/PGx9zzHN/2025-11-16-013213892.png"
@@ -507,14 +507,14 @@ _ponies = [
     Pony(
         name = "🤡 Мем",
         description = "Я пони, а ты нет",
-        message = ":>",
+        message = "Я пони, а ты нет. Смирись :>",
         message_only = True,
         weight = 0.05,
         image_url = "https://i.ibb.co/NgkjMkp1/2025-11-16-013316265.png"
     ),
     Pony(
         name = "🤡 Мем",
-        description = "Я пони и ты пони",
+        description = "Я пони и ты пони. Смирись :>",
         message = ":>",
         message_only = True,
         weight = 0.05,
