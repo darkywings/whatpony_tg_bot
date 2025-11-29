@@ -89,7 +89,7 @@ async def inline_handler(inline_query: InlineQuery):
                     title = f"{_pony.getName()}",
                     description = f"Вызвать {_pony.getName()}",
                     input_message_content=InputTextMessageContent(
-                        message_text=f"{hide_link(_pony.getImg()) if _pony.getImg() is not None else ""}{_pony.getMessage() if _pony.isMessageOnly() else _pony.get()}",
+                        message_text=f"{hide_link(_pony.getImg()) if _pony.getImg() is not None else ""}{(await get_pony(f"{_ponies.index(_pony)}"))[0]}",
                         parse_mode="HTML"
                     ),
                     reply_markup=keyboard,
