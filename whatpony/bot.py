@@ -89,7 +89,7 @@ async def inline_handler(inline_query: InlineQuery):
                     title = f"{_pony.getName()}",
                     description = f"Вызвать {_pony.getName()}",
                     input_message_content=InputTextMessageContent(
-                        message_text=f"{_pony.get()}{hide_link(_pony.getImg()) if _pony.getImg() is not None else ""}",
+                        message_text=f"{hide_link(_pony.getImg()) if _pony.getImg() is not None else ""}{_pony.getMessage() if _pony.isMessageOnly() else _pony.get()}",
                         parse_mode="HTML"
                     ),
                     reply_markup=keyboard,
@@ -105,7 +105,7 @@ async def inline_handler(inline_query: InlineQuery):
                 title="Узнать какая ты пони",
                 description="Нажмите сюда, чтобы определить какая вы пони",
                 input_message_content=InputTextMessageContent(
-                    message_text=f"{_selected_pony[0]}{hide_link(_selected_pony[1]) if _selected_pony[1] is not None else ""}",
+                    message_text=f"{hide_link(_selected_pony[1]) if _selected_pony[1] is not None else ""}{_selected_pony[0]}",
                     parse_mode="HTML"
                 ),
                 thumbnail_url="https://derpicdn.net/img/view/2012/1/6/38.png",
