@@ -584,7 +584,7 @@ _ponies = [
         description = "Мы можете предложить свою подпись для поняшки",
         message = "Вам выпала возможность предложить свои забавные, ироничные или саркастичные подписи для, уже существующих или еще не добавленных, поней.\n\nДля этого заполните анонимную форму по ссылке ниже. \nСпасибо! ^w^\n\nhttps://docs.google.com/forms/d/e/1FAIpQLScKczq2bnnIZSYqb94YdwNfR6phVKzPxgeqBaQwwZWUmLWp5g/viewform?usp=header",
         message_only = True,
-        weight = 0.1,
+        weight = 0.2,
         image_url = "https://derpicdn.net/img/view/2012/7/23/54077.gif"
     ),
     Pony(
