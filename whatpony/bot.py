@@ -68,8 +68,9 @@ keyboard = InlineKeyboardMarkup(
 @router.message(CommandStart())
 async def start(message: Message):
     await message.answer(
-        f"Привет, {message.from_user.username}. \nЭтот бот позволяет узнать какая ты поняшка\n\n"
-        "Напиши \"@whatpony_bot\" чтобы узнать какая ты пони или нажми на кнопку \"Какая ты пони\" ниже",
+        f"Привет, {message.from_user.username}!\nЭтот бот позволяет узнать какая ты поняшка\n\n"
+        "Напиши \"@whatpony_bot\" чтобы узнать какая ты пони или нажми на кнопку \"Какая ты пони\" ниже\n\n"
+        "Свои предложения можно присылать сюда: https://docs.google.com/forms/d/e/1FAIpQLScKczq2bnnIZSYqb94YdwNfR6phVKzPxgeqBaQwwZWUmLWp5g/viewform?usp=header\n^w^",
         reply_markup=keyboard,
     )
 
