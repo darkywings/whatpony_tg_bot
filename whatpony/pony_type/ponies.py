@@ -716,7 +716,7 @@ _ponies = [
             "Жуёт Дарки вместо жвачки. 💞👄",
         ],
         image_url = "https://derpicdn.net/img/view/2025/8/8/3655668.png",
-        weight = 0.05
+        weight = 0.1
     ),
     Pony(
         name = "💣 Сильвер",
