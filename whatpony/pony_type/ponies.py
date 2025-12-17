@@ -744,5 +744,5 @@ _ponies = [
         ],
         image_url = "https://derpicdn.net/img/2020/12/5/2502593/large.jpg",
         weight = 0.2
-    )
+    ),
 ]
