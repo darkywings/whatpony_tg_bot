@@ -28,7 +28,7 @@ LOGGER_CONFIG = {
     "version": 1,
     "disable_existing_loggers": False,
     "formatters": {
-        "console": {
+        "default": {
             "()": Formatter,
             "fmt": "%(name)s | %(asctime)s | %(levelname)s | %(message)s"
         }
@@ -37,7 +37,16 @@ LOGGER_CONFIG = {
         "console": {
             "level": "DEBUG",
             "class": "logging.StreamHandler",
-            "formatter": "console"
+            "formatter": "default"
+        },
+        "file": {
+            "level": "DEBUG",
+            "class": "logging.handlers.RotatingFileHandler",
+            "formatter": "file",
+            "filename": "whatpony.log",
+            "maxBytes": 1000,
+            "backupCount": 3,
+            "encoding": "utf-8"
         }
     },
     "root": {
@@ -125,7 +134,7 @@ async def inline_handler(inline_query: InlineQuery):
             logger.info("OK")
 
     except Exception as ex:
-        
+
         logger.error(f"Error on handling query with UID: {_user.id}; query_params: {_query}", exc_info=True)
         result = [
             InlineQueryResultArticle(
