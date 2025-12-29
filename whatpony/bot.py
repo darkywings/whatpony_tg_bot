@@ -42,7 +42,7 @@ LOGGER_CONFIG = {
         "file": {
             "level": "DEBUG",
             "class": "logging.handlers.RotatingFileHandler",
-            "formatter": "file",
+            "formatter": "default",
             "filename": "whatpony.log",
             "maxBytes": 1000,
             "backupCount": 3,
@@ -50,7 +50,7 @@ LOGGER_CONFIG = {
         }
     },
     "root": {
-        "handlers": ["console"],
+        "handlers": ["console", "file"],
         "level": "DEBUG"
     }
 }
@@ -88,6 +88,7 @@ async def start(message: Message):
 async def inline_handler(inline_query: InlineQuery):
     
     try:
+        logger.a()
 
         _user = inline_query.from_user
         _query = inline_query.query
