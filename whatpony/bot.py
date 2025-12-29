@@ -2,6 +2,7 @@ import asyncio
 import logging.config
 import os
 import dotenv
+import datetime
 import logging
 import re
 from logging import Formatter
@@ -77,44 +78,71 @@ async def start(message: Message):
 @router.inline_query()
 async def inline_handler(inline_query: InlineQuery):
 
+    _user = inline_query.from_user
     _query = inline_query.query
+
+    logger.info(f"QueryFrom: uid: {_user.id}; username: {_user.username or "EMPTY"}; query_params: {_query}")
     
-    if re.match(r"call (\d+)", _query):
-        results = []
-        _page = int(re.match(r"call (\d+)", _query)[1])
-        _max = 50
-        for _pony in _ponies[_max * (_page - 1): _max * _page]:
-            results.append(
+    try:
+        if re.match(r"call (\d+)", _query):
+            results = []
+            _page = int(re.match(r"call (\d+)", _query)[1])
+            _max = 50
+            for _pony in _ponies[_max * (_page - 1): _max * _page]:
+                results.append(
+                    InlineQueryResultArticle(
+                        id = f"{_ponies.index(_pony)}",
+                        title = f"{_pony.getName()}",
+                        description = f"Вызвать {_pony.getName()}",
+                        input_message_content=InputTextMessageContent(
+                            message_text=f"{hide_link(_pony.getImg()) if _pony.getImg() is not None else ""}{(await get_pony(f"{_ponies.index(_pony)}"))[0]}",
+                            parse_mode="HTML"
+                        ),
+                        reply_markup=keyboard,
+                    )
+                )
+
+        else:
+            _selected_pony: tuple[str, str] = await get_pony(inline_query.query)
+
+            results = [
                 InlineQueryResultArticle(
-                    id = f"{_ponies.index(_pony)}",
-                    title = f"{_pony.getName()}",
-                    description = f"Вызвать {_pony.getName()}",
+                    id="1",
+                    title="Узнать какая ты пони",
+                    description="Нажмите сюда, чтобы определить какая вы пони",
                     input_message_content=InputTextMessageContent(
-                        message_text=f"{hide_link(_pony.getImg()) if _pony.getImg() is not None else ""}{(await get_pony(f"{_ponies.index(_pony)}"))[0]}",
+                        message_text=f"{hide_link(_selected_pony[1]) if _selected_pony[1] is not None else ""}{_selected_pony[0]}",
                         parse_mode="HTML"
                     ),
+                    thumbnail_url="https://derpicdn.net/img/view/2012/1/6/38.png",
                     reply_markup=keyboard,
                 )
-            )
+            ]
 
-    else:
-        _selected_pony: tuple[str, str] = await get_pony(inline_query.query)
+            await inline_query.answer(results,
+                              cache_time=0)
+            
+            logger.info("OK")
 
-        results = [
+    except Exception as ex:
+        
+        logger.error(f"Error on handling query with UID: {_user.id}; query_params: {_query}", exc_info=True)
+        result = [
             InlineQueryResultArticle(
                 id="1",
-                title="Узнать какая ты пони",
-                description="Нажмите сюда, чтобы определить какая вы пони",
+                title="Произошла ошибка",
+                description="Нажмите сюда, чтобы вывести ошибку и контактную информацию разработчика",
                 input_message_content=InputTextMessageContent(
-                    message_text=f"{hide_link(_selected_pony[1]) if _selected_pony[1] is not None else ""}{_selected_pony[0]}",
+                    message_text=f"{hide_link("https://derpicdn.net/img/view/2025/11/20/3715552.gif")}TIMESTAMP: {datetime.datetime.now()}\nUID: {_user.id}\n\nСвяжитесь с @darky_wings и передайте ему эту информацию.\nСпасибо ^-^\nИзвините за неудобства",
                     parse_mode="HTML"
                 ),
-                thumbnail_url="https://derpicdn.net/img/view/2012/1/6/38.png",
+                thumbnail_url="https://derpicdn.net/img/2021/2/13/2549975/large.png",
                 reply_markup=keyboard,
             )
         ]
-    await inline_query.answer(results,
-                              cache_time=0)
+
+        await inline_query.answer(result, cache_time=0)
+    
 
 async def get_pony(index: str = None):
 
