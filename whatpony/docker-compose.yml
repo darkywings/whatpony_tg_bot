@@ -3,6 +3,8 @@ name: darky-core
 services:
   whatpony-bot:
     container_name: whatpony-bot
+    environment:
+      - TZ=Europe/Moscow
     build: 
       context: .
       dockerfile: Dockerfile
