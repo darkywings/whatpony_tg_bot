@@ -6,6 +6,7 @@ import datetime
 import logging
 import re
 from logging import Formatter
+from pathlib import Path
 
 from aiogram import Router, Bot, Dispatcher
 from aiogram.filters import CommandStart
@@ -23,6 +24,9 @@ from pony_type import _ponies, Pony
 from utils.randomizer import PonyRandomizer
 
 dotenv.load_dotenv()
+
+BASE_DIR = Path(__file__).resolve().parent
+Path(BASE_DIR / "logs").mkdir(parents=True, exist_ok=True)
 
 LOGGER_CONFIG = {
     "version": 1,
@@ -44,7 +48,7 @@ LOGGER_CONFIG = {
             "class": "logging.handlers.RotatingFileHandler",
             "formatter": "default",
             "filename": "logs/whatpony.log",
-            "maxBytes": 1000,
+            "maxBytes": 10000,
             "backupCount": 3,
             "encoding": "utf-8"
         }
