@@ -64,4 +64,4 @@ class Pony:
         '''
         Получить готовую фразу <имя - описание>
         '''
-        return f"{self.getName()} - {self.getDesc()}"
+        return f"{self.getName()}\n{self.getDesc()}"
