@@ -99,6 +99,9 @@ async def inline_handler(inline_query: InlineQuery):
         logger.info(f"QueryFrom: uid: {_user.id}; username: {_user.username or "EMPTY"}; query_params: {_query}")
 
         if re.match(r"call (\d+)", _query):
+
+            logger.info(f"Returning list of ponies...")
+
             results = []
             _page = int(re.match(r"call (\d+)", _query)[1])
             _max = 50
@@ -133,10 +136,10 @@ async def inline_handler(inline_query: InlineQuery):
                 )
             ]
 
-            await inline_query.answer(results,
+        await inline_query.answer(results,
                               cache_time=0)
             
-            logger.info("OK")
+        logger.info("OK")
 
     except Exception as ex:
 
