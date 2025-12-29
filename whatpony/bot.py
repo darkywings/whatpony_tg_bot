@@ -91,7 +91,7 @@ async def inline_handler(inline_query: InlineQuery):
 
         _user = inline_query.from_user
         _query = inline_query.query
-        
+
         logger.info(f"QueryFrom: uid: {_user.id}; username: {_user.username or "EMPTY"}; query_params: {_query}")
 
         if re.match(r"call (\d+)", _query):
@@ -143,7 +143,7 @@ async def inline_handler(inline_query: InlineQuery):
                 title="Произошла ошибка",
                 description="Нажмите сюда, чтобы вывести ошибку и контактную информацию разработчика",
                 input_message_content=InputTextMessageContent(
-                    message_text=f"{hide_link("https://derpicdn.net/img/view/2025/11/20/3715552.gif")}TIMESTAMP: {datetime.datetime.now()}\nUID: {_user.id}\n\nСвяжитесь с @darky_wings и передайте ему эту информацию.\nСпасибо ^-^\nИзвините за неудобства",
+                    message_text=f"{hide_link("https://derpicdn.net/img/view/2025/11/20/3715552.gif")}TIMESTAMP: {datetime.datetime.now()}\nUID: {_user.id}\n\nСвяжитесь с {os.getenv("DEV")} и передайте ему эту информацию.\nСпасибо ^-^\nИзвините за неудобства",
                     parse_mode="HTML"
                 ),
                 thumbnail_url="https://derpicdn.net/img/2021/2/13/2549975/large.png",
