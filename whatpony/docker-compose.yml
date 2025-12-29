@@ -8,6 +8,8 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile
+    volumes:
+      - ./logs:/app/logs
     restart: always
     networks:
       - darky-network
