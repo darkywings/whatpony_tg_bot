@@ -95,7 +95,6 @@ async def inline_handler(inline_query: InlineQuery):
     _query = inline_query.query
     
     try:
-        logger.a()
 
         logger.info(f"QueryFrom: uid: {_user.id}; username: {_user.username or "EMPTY"}; query_params: {_query}")
 
