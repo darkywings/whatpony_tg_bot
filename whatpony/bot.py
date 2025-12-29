@@ -43,7 +43,7 @@ LOGGER_CONFIG = {
             "level": "DEBUG",
             "class": "logging.handlers.RotatingFileHandler",
             "formatter": "default",
-            "filename": "whatpony.log",
+            "filename": "logs/whatpony.log",
             "maxBytes": 1000,
             "backupCount": 3,
             "encoding": "utf-8"
