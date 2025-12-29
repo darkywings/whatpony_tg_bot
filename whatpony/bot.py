@@ -86,13 +86,14 @@ async def start(message: Message):
 
 @router.inline_query()
 async def inline_handler(inline_query: InlineQuery):
-
-    _user = inline_query.from_user
-    _query = inline_query.query
-
-    logger.info(f"QueryFrom: uid: {_user.id}; username: {_user.username or "EMPTY"}; query_params: {_query}")
     
     try:
+
+        _user = inline_query.from_user
+        _query = inline_query.query
+        
+        logger.info(f"QueryFrom: uid: {_user.id}; username: {_user.username or "EMPTY"}; query_params: {_query}")
+
         if re.match(r"call (\d+)", _query):
             results = []
             _page = int(re.match(r"call (\d+)", _query)[1])
