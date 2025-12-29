@@ -343,6 +343,13 @@ _ponies = [
         image_url = "https://derpicdn.net/img/view/2016/5/16/1155393.gif"
     ),
     Pony(
+        name = " Лайтнинг Даст",
+        description = [
+            "Не даст. "
+        ],
+        image_url = "https://derpicdn.net/img/view/2025/11/6/3706883.gif"
+    ),
+    Pony(
         name = "⚗️ Зекора",
         description = [
             "Порча на понос? Это по ее части 🧪💩",
