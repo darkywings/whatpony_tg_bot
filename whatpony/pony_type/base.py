@@ -6,7 +6,7 @@ class Pony:
                  name: str,
                  description: str | list[str],
                  weight: float = 1,
-                 image_url: str | None = None,
+                 image_url: str | list[str] | None = None,
                  message: str | None = None,
                  message_only: bool = False) -> None:
         '''
@@ -32,7 +32,7 @@ class Pony:
         '''
         self._name = name
         self._description = [description] if isinstance(description, str) else description
-        self._image_url = image_url
+        self._image_url = [image_url] if isinstance(image_url, str) else image_url
         self._weight = weight
         self._message_only = message_only
         
@@ -49,7 +49,7 @@ class Pony:
         return random.choice(self._description)
     
     def getImg(self) -> str:
-        return self._image_url
+        return random.choice(self._image_url)
     
     def getWeight(self):
         return self._weight

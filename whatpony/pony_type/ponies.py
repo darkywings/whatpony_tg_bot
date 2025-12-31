@@ -798,4 +798,18 @@ _ponies = [
         image_url = "https://derpicdn.net/img/2020/12/5/2502593/large.jpg",
         weight = 0.2
     ),
+    Pony(
+        name = " Новый год",
+        description = " C новой годай",
+        message = "✨ С наступающим или уже наступившим днём согревающего очага, желаю хорошо наесться вкусностями и обнять поняшку :>",
+        message_only = True,
+        weight = 10,
+        image_url = [
+            "https://derpicdn.net/img/view/2021/12/22/2769728.gif",
+            "https://derpicdn.net/img/view/2021/12/10/2762327.gif",
+            "https://derpicdn.net/img/view/2020/1/29/2260023.gif",
+            "https://derpicdn.net/img/view/2019/4/15/2013400.gif",
+            "https://derpicdn.net/img/view/2016/3/28/1118866.gif",
+        ]
+    )
 ]
