@@ -62,6 +62,8 @@ LOGGER_CONFIG = {
 logger = logging.getLogger("whatpony-bot")
 logging.config.dictConfig(LOGGER_CONFIG)
 
+logger.info(f"Starting...")
+
 ponyRand = PonyRandomizer(_ponies)
 
 bot = Bot(token=os.getenv("BOT_TOKEN"))
@@ -174,7 +176,7 @@ async def get_pony(index: str = None):
         return (_selected_pony, None)
 
 async def main():
-    logger.info(f"Started with {len(_ponies)} ponies")
+    logger.info(f"Started with total {ponyRand.getTotal()} ponies. {ponyRand.getDisabled()} disabled")
     dp.include_router(router)
     await dp.start_polling(bot)
 

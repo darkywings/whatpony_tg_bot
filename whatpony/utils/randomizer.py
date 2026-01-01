@@ -19,16 +19,41 @@ class PonyRandomizer:
         :param ponies: Список состоящий из экземпляров Pony()
         :type ponies: list[Pony]
         '''
-        self._ponies = ponies
+        self._ponies = []
         self._weights = []
+        self._total = 0
+        self._enabled = 0
+        self._disabled = 0
 
-        for _pony in self._ponies:
+        _pony: 'Pony'
+
+        for _pony in ponies:
+
+            self._ponies.append(_pony)
+            self._total += 1
             self._weights.append(_pony.getWeight())
+
+            if _pony.isDisabled():
+                self._disabled += 1
+                continue
+
+            self._enabled +=1
         
         _total_weights = sum(self._weights)
         for _pony in self._ponies:
-            logger.debug(f"Pony<{self._ponies.index(_pony):2}>: {re.sub(r'[^\w\s\.,!?;:\(\)\"\'-]', '', _pony.getName())[:20]:25} {f"Weight: {_pony.getWeight():5.3f}":18} {f"Chance: {round(_pony.getWeight() / _total_weights * 100, 3):5.3f}%":15}")
+            logger.debug(f"Pony<{self._ponies.index(_pony):2}>: {re.sub(r'[^\w\s\.,!?;:\(\)\"\'-]', '', _pony.getName())[:20]:25} "
+                         f"{f"Weight: {f"{_pony.getWeight():5.3f}" if not _pony.isDisabled() else "-.---"}":18} "
+                         f"{f"Chance: {f"{round(_pony.getWeight() / _total_weights * 100, 3):5.3f}" if not _pony.isDisabled() else "-.---"}%":15} "
+                         f"{"[DISABLED]" if _pony.isDisabled() else ""}")
 
+    def getTotal(self) -> int:
+        return self._total
+    
+    def getEnabled(self) -> int:
+        return self._enabled
+    
+    def getDisabled(self) -> int:
+        return self._disabled
     
     def get_pony(self, index: str | int = None) -> 'Pony':
         '''
