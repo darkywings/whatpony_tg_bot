@@ -98,6 +98,20 @@ async def inline_handler(inline_query: InlineQuery):
     
     try:
 
+        results = [
+            InlineQueryResultArticle(
+                    id="1",
+                    title="Ошибка",
+                    description=f"Недопустимые параметры '{_query}' в запросе",
+                    input_message_content=InputTextMessageContent(
+                        message_text=f"Ошибка в запросе, повторите попытку",
+                        parse_mode="HTML"
+                    ),
+                    thumbnail_url="https://derpicdn.net/img/2021/2/13/2549975/large.png",
+                    reply_markup=keyboard,
+                )
+        ]
+
         logger.info(f"QueryFrom: uid: {_user.id}; username: {_user.username or "EMPTY"}; query_params: {_query}")
 
         if re.match(r"call (\d+)", _query):
@@ -121,8 +135,12 @@ async def inline_handler(inline_query: InlineQuery):
                     )
                 )
 
-        else:
-            _selected_pony: tuple[str, str] = await get_pony(inline_query.query)
+        elif match := re.match(r"^(id (?P<pony_id>\w+))?$", _query):
+
+            if match:
+                _pony_id = match.group('pony_id')
+
+            _selected_pony: tuple[str, str] = await get_pony(_pony_id)
 
             results = [
                 InlineQueryResultArticle(

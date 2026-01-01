@@ -63,9 +63,6 @@ class PonyRandomizer:
         :type index: str | int
         '''
         if index is not None and index != "":
-            if not f"{index}".isdigit() or int(f"{index}") >= len(self._ponies):
-                return "Unable to use index because of error in the queue"
-
             return self._ponies[int(f"{index}")]
             
         return random.choices(self._ponies, self._weights)[0]
