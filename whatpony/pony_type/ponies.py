@@ -539,6 +539,13 @@ _ponies = [
         image_url = "https://derpicdn.net/img/view/2012/12/4/172645.gif"
     ),
     Pony(
+        name = "🐹 Пипсквик",
+        description = [
+            "Главный фанат принцессы Луны. 🌙🌚",
+        ],
+        image_url = "https://derpicdn.net/img/view/2012/7/3/29502.png"
+    ),
+    Pony(
         name = "🏺 Деринг Ду",
         description = [
             "Пегас, археолог, писательница и катастрофа для любой архитектуры старше тысячи лет. 🏛️💥",
