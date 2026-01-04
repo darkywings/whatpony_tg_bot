@@ -59,6 +59,9 @@ LOGGER_CONFIG = {
     }
 }
 
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+DONATE_LINK = os.getenv("DONATE_LINK", "https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+
 logger = logging.getLogger("whatpony-bot")
 logging.config.dictConfig(LOGGER_CONFIG)
 
@@ -66,7 +69,7 @@ logger.info(f"Starting...")
 
 ponyRand = PonyRandomizer(_ponies)
 
-bot = Bot(token=os.getenv("BOT_TOKEN"))
+bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
 router = Router()
 
@@ -75,11 +78,17 @@ keyboard = InlineKeyboardMarkup(
         [
             InlineKeyboardButton(text="Какая ты пони",
                                  switch_inline_query_current_chat=""),
+        ],
+        [
             InlineKeyboardButton(text="Поделиться",
                                  switch_inline_query=""),
+            InlineKeyboardButton(text="Поддержать бота" if os.getenv("DONATE_LINK", None) else "Кнопка не настроена :)",
+                                 url=DONATE_LINK),
         ]
     ]
 )
+if not os.getenv("DONATE_LINK", None):
+    logger.warning(f"DONATE_LINK not found in .env")
 
 @router.message(CommandStart())
 async def start(message: Message):
