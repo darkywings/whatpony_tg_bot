@@ -55,7 +55,7 @@ class PonyRandomizer:
     def getDisabled(self) -> int:
         return self._disabled
     
-    def get_pony(self, index: str | int = None) -> 'Pony':
+    async def get_pony(self, index: str | int = None) -> 'Pony':
         '''
         Returns a Pony object
 

@@ -5,7 +5,6 @@ import dotenv
 import datetime
 import logging
 import re
-from logging import Formatter
 from pathlib import Path
 
 from aiogram import Router, Bot, Dispatcher
@@ -22,45 +21,18 @@ from aiogram.types import (
 
 from pony_type import _ponies, Pony
 from utils.randomizer import PonyRandomizer
+from utils.log_config import LOGGER_CONFIG
+from utils.replies import BotReplies
+from utils.keyboard import BotKeyboard
 
 dotenv.load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent
 Path(BASE_DIR / "logs").mkdir(parents=True, exist_ok=True)
 
-LOGGER_CONFIG = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "formatters": {
-        "default": {
-            "()": Formatter,
-            "fmt": "%(name)s | %(asctime)s | %(levelname)s | %(message)s"
-        }
-    },
-    "handlers": {
-        "console": {
-            "level": "DEBUG",
-            "class": "logging.StreamHandler",
-            "formatter": "default"
-        },
-        "file": {
-            "level": "DEBUG",
-            "class": "logging.handlers.RotatingFileHandler",
-            "formatter": "default",
-            "filename": "logs/whatpony.log",
-            "maxBytes": 1000000,
-            "backupCount": 3,
-            "encoding": "utf-8"
-        }
-    },
-    "root": {
-        "handlers": ["console", "file"],
-        "level": "DEBUG"
-    }
-}
+
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
-DONATE_LINK = os.getenv("DONATE_LINK", "https://www.youtube.com/watch?v=dQw4w9WgXcQ")
 
 logger = logging.getLogger("whatpony-bot")
 logging.config.dictConfig(LOGGER_CONFIG)
@@ -73,31 +45,9 @@ bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
 router = Router()
 
-keyboard = InlineKeyboardMarkup(
-    inline_keyboard=[
-        [
-            InlineKeyboardButton(text="Какая ты пони",
-                                 switch_inline_query_current_chat=""),
-        ],
-        [
-            InlineKeyboardButton(text="Поделиться",
-                                 switch_inline_query=""),
-            InlineKeyboardButton(text="Поддержать бота" if os.getenv("DONATE_LINK", None) else "Кнопка не настроена :)",
-                                 url=DONATE_LINK),
-        ]
-    ]
-)
-if not os.getenv("DONATE_LINK", None):
-    logger.warning(f"DONATE_LINK not found in .env")
-
 @router.message(CommandStart())
 async def start(message: Message):
-    await message.answer(
-        f"Привет, {message.from_user.username}!\nЭтот бот позволяет узнать какая ты поняшка\n\n"
-        "Напиши \"@whatpony_bot\" чтобы узнать какая ты пони или нажми на кнопку \"Какая ты пони\" ниже\n\n"
-        "Свои предложения можно присылать сюда: https://docs.google.com/forms/d/e/1FAIpQLScKczq2bnnIZSYqb94YdwNfR6phVKzPxgeqBaQwwZWUmLWp5g/viewform?usp=header\n^w^",
-        reply_markup=keyboard,
-    )
+    await BotReplies.sendStartMessage(message)
 
 @router.inline_query()
 async def inline_handler(inline_query: InlineQuery):
@@ -106,64 +56,23 @@ async def inline_handler(inline_query: InlineQuery):
     _query = inline_query.query
     
     try:
-
-        results = [
-            InlineQueryResultArticle(
-                    id="1",
-                    title="Ошибка",
-                    description=f"Недопустимые параметры '{_query}' в запросе",
-                    input_message_content=InputTextMessageContent(
-                        message_text=f"Ошибка в запросе, повторите попытку",
-                        parse_mode="HTML"
-                    ),
-                    thumbnail_url="https://derpicdn.net/img/2021/2/13/2549975/large.png",
-                    reply_markup=keyboard,
-                )
-        ]
+        results = []
 
         logger.info(f"QueryFrom: uid: {_user.id}; username: {_user.username or "EMPTY"}; query_params: {_query}")
 
-        if re.match(r"call (\d+)", _query):
-
-            logger.info(f"Returning list of ponies...")
-
-            results = []
-            _page = int(re.match(r"call (\d+)", _query)[1])
-            _max = 50
-            for _pony in _ponies[_max * (_page - 1): _max * _page]:
-                results.append(
-                    InlineQueryResultArticle(
-                        id = f"{_ponies.index(_pony)}",
-                        title = f"{_pony.getName()}",
-                        description = f"Вызвать {_pony.getName()}",
-                        input_message_content=InputTextMessageContent(
-                            message_text=f"{hide_link(_pony.getImg()) if _pony.getImg() is not None else ""}{(await get_pony(f"{_ponies.index(_pony)}"))[0]}",
-                            parse_mode="HTML"
-                        ),
-                        reply_markup=keyboard,
-                    )
-                )
-
-        elif match := re.match(r"^(id (?P<pony_id>\w+))?$", _query):
-
+        if match := re.match(r"call (?P<page>\d+)", _query):
             if match:
-                _pony_id = match.group('pony_id')
+                _page = int(match.group('page'))
+            results = await BotReplies.getPonies(page = _page)
 
-            _selected_pony: tuple[str, str] = await get_pony(_pony_id)
-
-            results = [
-                InlineQueryResultArticle(
-                    id="1",
-                    title="Узнать какая ты пони",
-                    description="Нажмите сюда, чтобы определить какая вы пони",
-                    input_message_content=InputTextMessageContent(
-                        message_text=f"{hide_link(_selected_pony[1]) if _selected_pony[1] is not None else ""}{_selected_pony[0]}",
-                        parse_mode="HTML"
-                    ),
-                    thumbnail_url="https://derpicdn.net/img/view/2012/1/6/38.png",
-                    reply_markup=keyboard,
-                )
-            ]
+        else:
+            if match := re.match(r"^(id (?P<pony_id>\w+))?$", _query):
+                if match:
+                    _pony_id = match.group('pony_id')
+                _selected_pony: Pony = await ponyRand.get_pony(index = _pony_id)
+            else:
+                _selected_pony: Pony = await ponyRand.get_pony()
+            results = await BotReplies.getOnePony(selected_pony = _selected_pony)
 
         await inline_query.answer(results,
                               cache_time=0)
@@ -173,20 +82,9 @@ async def inline_handler(inline_query: InlineQuery):
     except Exception as ex:
 
         logger.error(f"Error on handling query with UID: {_user.id}; query_params: {_query}", exc_info=True)
-        result = [
-            InlineQueryResultArticle(
-                id="1",
-                title="Произошла ошибка",
-                description="Нажмите сюда, чтобы вывести ошибку и контактную информацию разработчика",
-                input_message_content=InputTextMessageContent(
-                    message_text=f"{hide_link("https://derpicdn.net/img/view/2025/11/20/3715552.gif")}TIMESTAMP: {datetime.datetime.now()}\nUID: {_user.id}\n\nСвяжитесь с {os.getenv("DEV")} и передайте ему эту информацию.\nСпасибо ^-^\nИзвините за неудобства",
-                    parse_mode="HTML"
-                ),
-                thumbnail_url="https://derpicdn.net/img/2021/2/13/2549975/large.png",
-                reply_markup=keyboard,
-            )
-        ]
-
+        result = BotReplies.getError(timestamp = datetime.datetime.now(),
+                                     uid = _user.id,
+                                     dev = os.getenv('DEV', '::EMPTY_PARAM::'))
         await inline_query.answer(result, cache_time=0)
     
 

@@ -69,9 +69,3 @@ class Pony:
     
     def isDisabled(self) -> bool:
         return self._disabled
-    
-    def get(self) -> str:
-        '''
-        Получить готовую фразу <имя - описание>
-        '''
-        return f"{self.getName()}\n{self.getDesc()}"
