@@ -17,24 +17,26 @@ if not os.getenv("DONATE_LINK", None):
     logger.warning(f"DONATE_LINK not found in .env")
 
 class BotKeyboard:
+    
+    def getKeyboard(share_query: str = "") -> InlineKeyboardMarkup:
 
-    def __init__(self,
-                 _donate_link: str = DONATE_LINK) -> None:
-        self._donate_link: str = _donate_link
-        self._keyboard: InlineKeyboardMarkup = InlineKeyboardMarkup(
-            inline_keyboard = [
+        '''
+        Возвращает подготовленную inline-клавиатуру
+
+        :param share_query: Идентификатор ответа, для возможности им поделиться с другими
+        :type share_query: str
+        '''
+        return InlineKeyboardMarkup(
+            inline_keyboard=[
                 [
                     InlineKeyboardButton(text="Какая ты пони",
                                         switch_inline_query_current_chat=""),
                 ],
                 [
                     InlineKeyboardButton(text="Поделиться",
-                                        switch_inline_query=""),
+                                        switch_inline_query=share_query),
                     InlineKeyboardButton(text="Поддержать бота" if os.getenv("DONATE_LINK", None) else "Кнопка не настроена :)",
                                         url=DONATE_LINK),
                 ]
             ]
         )
-    
-    def getKeyboard(self):
-        return self._keyboard

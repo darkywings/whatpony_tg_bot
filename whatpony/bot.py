@@ -65,8 +65,13 @@ async def inline_handler(inline_query: InlineQuery):
                 _page = int(match.group('page'))
             results = await BotReplies.getPonies(page = _page)
 
+        elif match := re.match(r"shr (?P<share_link>.+)", _query):
+            if match:
+                _share_link = match.group('share_link')
+            results = await BotReplies.getSharedPony(query = _share_link)
+
         else:
-            if match := re.match(r"^(id (?P<pony_id>\w+))?$", _query):
+            if match := re.match(r"^(id (?P<pony_id>\d+))?$", _query):
                 if match:
                     _pony_id = match.group('pony_id')
                 _selected_pony: Pony = await ponyRand.get_pony(index = _pony_id)

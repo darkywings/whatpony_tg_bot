@@ -13,13 +13,10 @@ from utils.keyboard import BotKeyboard
 if TYPE_CHECKING:
     from pony_type import Pony
     from aiogram.types import (
-        InlineKeyboardMarkup,
         Message
     )
 
 logger = logging.getLogger("whatpony-bot")
-
-bot_keyboard = BotKeyboard()
 
 class BotReplies:
 
@@ -40,7 +37,7 @@ class BotReplies:
                 f"Свои предложения можно присылать сюда: "
                 f"https://docs.google.com/forms/d/e/1FAIpQLScKczq2bnnIZSYqb94YdwNfR6phVKzPxgeqBaQwwZWUmLWp5g/viewform?usp=header\n^w^"
             ),
-            reply_markup = bot_keyboard.getKeyboard()
+            reply_markup = BotKeyboard.getKeyboard()
         )
     
     async def getOnePony(selected_pony: 'Pony') -> list[InlineQueryResultArticle]:
@@ -63,7 +60,7 @@ class BotReplies:
                         parse_mode="HTML"
                     ),
                     thumbnail_url="https://derpicdn.net/img/view/2012/1/6/38.png",
-                    reply_markup=bot_keyboard.getKeyboard(),
+                    reply_markup=BotKeyboard.getKeyboard(),
                 )
             ]
     
@@ -91,11 +88,32 @@ class BotReplies:
                         message_text=f"{hide_link(_pony_data.get('img')) if _pony_data.get('img') is not None else ""}{_pony_data.get('output')}",
                         parse_mode="HTML"
                     ),
-                    reply_markup=bot_keyboard.getKeyboard(),
+                    reply_markup=BotKeyboard.getKeyboard(),
                 )
             )
 
         return _results
+
+    async def getSharedPony(query: str) -> list[InlineQueryResultArticle]:
+        '''
+        Возвращает конкретную подпись и конкретную пони, которая выпала ранее пользователю
+
+        :param query: содержит необходимую информацию для того, чтобы поделиться с пользователем
+        :type query: str
+        '''
+        return [
+            InlineQueryResultArticle(
+                id="1",
+                title="В разработке",
+                description="Данный функционал находится в разработке",
+                input_message_content=InputTextMessageContent(
+                    message_text=f"{hide_link("https://derpicdn.net/img/view/2025/11/20/3715552.gif")}Вы забрели в запретную зону, выйдите и зайдите нормально",
+                    parse_mode="HTML"
+                ),
+                thumbnail_url="https://derpicdn.net/img/2021/2/13/2549975/large.png",
+                reply_markup=BotKeyboard.getKeyboard(),
+            )
+        ]
     
     def getError(timestamp: str,
                  uid: str,
@@ -122,7 +140,7 @@ class BotReplies:
                     parse_mode="HTML"
                 ),
                 thumbnail_url="https://derpicdn.net/img/2021/2/13/2549975/large.png",
-                reply_markup=bot_keyboard.getKeyboard(),
+                reply_markup=BotKeyboard.getKeyboard(),
             )
         ]
     
@@ -143,4 +161,9 @@ class BotReplies:
                 f"{_pony_data.get("name", "::PONY_NAME::")}\n"
                 f"{_pony_data.get("desc", "::PONY_DESC::")}"
             )})
+        # TODO: share query
+        # TS00000000:00000000:0000:A:0000:00000000:5498345826:(SUM of ALL binaries)101000111101110100001100101100010
+        # PONYNAME_ID:DESC_ID:IMG_ID:IS_MESSAGE_ONLY:MSG_ID:UID:SUM_CHK
+        # binary to 16-bit
+        # TS01:00:0:A:0:00:5498345826:147BA1962
         return _pony_data
