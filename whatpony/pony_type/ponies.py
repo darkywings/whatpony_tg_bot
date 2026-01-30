@@ -502,10 +502,18 @@ _ponies = [
         image_url = "https://derpicdn.net/img/view/2015/7/5/930213.gif"
     ),
     Pony(
+        name = "🟤 Филси Рич",
+        description = [
+            "Безобразно богатый. 💎💰",
+            "Ходячий кошелёк 💰",
+        ],
+        image_url = "https://derpicdn.net/img/view/2014/4/5/593411.png"
+    ),
+    Pony(
         name = "💎 Спойлд Рич",
         description = [
             "Была Спойлд Милк - прокисла. Вышла замуж - сразу стала элитным продуктом. 🧀👑",
-            "Манипулятивная и властная мразь. 💎🤮"
+            "Манипулятивная и властная мразь. 💎🤮",
         ],
         image_url = "https://derpicdn.net/img/view/2017/4/3/1402790.gif"
     ),
