@@ -976,7 +976,14 @@ _ponies = [
         image_url = "https://i.ibb.co/vx5xSMJP/photo-2026-02-09-12-23-26.jpg",
         weight = 0.2
     ),
-    Pony(),
+    Pony(
+        name = "🍚 Просто Райс",
+        description = [
+            "В этом доме последнее слово за мужчиной. И это слово: \"подчиняюсь\" 😈💜"
+        ],
+        image_url = "https://i.ibb.co/whVJs4kV/alru.gif",
+        weight = 0.2
+    ),
     Pony(
         name = "🌈 Оленедешка",
         description = [
