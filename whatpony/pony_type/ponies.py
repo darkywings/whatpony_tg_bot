@@ -949,7 +949,14 @@ _ponies = [
         image_url = "https://derpicdn.net/img/2025/7/30/3650519/large.png",
         weight = 0.2
     ),
-    Pony(),
+    Pony(
+        name = "🤨 Джейн",
+        description = [
+            "Пользуется крылышками, чтобы не вставать на табуреточку. 🪽🥰"
+        ],
+        image_url = "https://i.ibb.co/RqJJHhM/photo-2026-02-09-16-50-17.jpg",
+        weight = 0.2
+    ),
     Pony(),
     Pony(),
     Pony(
