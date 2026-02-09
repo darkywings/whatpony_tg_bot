@@ -741,6 +741,13 @@ _ponies = [
         image_url = "https://derpicdn.net/img/view/2019/3/1/1974168.gif"
     ),
     Pony(
+        name = "🤎 Синдер Глоу",
+        description = [
+            "Показывает синусоиду. 〰️🤎",
+        ],
+        image_url = "https://derpicdn.net/img/view/2019/12/1/2209747.gif"
+    ),
+    Pony(
         name = "✨ Бризи",
         description = [
             "Летающие комарики ✨",
@@ -933,6 +940,12 @@ _ponies = [
         image_url = "https://i.ibb.co/6cpYg2tN/silver-Wiggle.gif",
         weight = 0.2
     ),
+    Pony(
+        name = ""
+    ),
+    Pony(),
+    Pony(),
+    Pony(),
     Pony(
         name = "🌈 Оленедешка",
         description = [
