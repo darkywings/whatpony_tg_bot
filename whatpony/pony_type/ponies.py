@@ -957,7 +957,14 @@ _ponies = [
         image_url = "https://i.ibb.co/RqJJHhM/photo-2026-02-09-16-50-17.jpg",
         weight = 0.2
     ),
-    Pony(),
+    Pony(
+        name = "😇 Дженнифер",
+        description = [
+            "Пегасочка, пострадавшая в неравной битве с воздухом. 🤕💨",
+        ],
+        image_url = "https://i.ibb.co/NGGfgwp/photo-2026-02-09-20-28-12.jpg",
+        weight = 0.2
+    ),
     Pony(),
     Pony(
         name = "🌈 Оленедешка",
