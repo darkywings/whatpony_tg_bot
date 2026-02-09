@@ -954,7 +954,7 @@ _ponies = [
         description = [
             "Пользуется крылышками, чтобы не вставать на табуреточку. 🪽🥰"
         ],
-        image_url = "https://i.ibb.co/RqJJHhM/photo-2026-02-09-16-50-17.jpg",
+        image_url = "https://i.ibb.co/GfMNtLMX/photo-2026-02-09-16-50-17.jpg",
         weight = 0.2
     ),
     Pony(
@@ -962,7 +962,7 @@ _ponies = [
         description = [
             "Пегасочка, пострадавшая в неравной битве с воздухом. 🤕💨",
         ],
-        image_url = "https://i.ibb.co/NGGfgwp/photo-2026-02-09-20-28-12.jpg",
+        image_url = "https://i.ibb.co/27zys2k5/photo-2026-02-09-20-28-12.jpg",
         weight = 0.2
     ),
     Pony(
@@ -973,7 +973,7 @@ _ponies = [
             "Эта чертилка сидит на вашем плече и шепчет сделать очередную глупость 😇",
             "Вы сегодня хаотик монстряка 😈",
         ],
-        image_url = "https://i.ibb.co/vx5xSMJP/photo-2026-02-09-12-23-26.jpg",
+        image_url = "https://i.ibb.co/CprjCmZk/photo-2026-02-09-12-23-26.jpg",
         weight = 0.2
     ),
     Pony(
@@ -981,7 +981,7 @@ _ponies = [
         description = [
             "В этом доме последнее слово за мужчиной. И это слово: \"подчиняюсь\" 😈💜"
         ],
-        image_url = "https://i.ibb.co/whVJs4kV/alru.gif",
+        image_url = "https://i.ibb.co/HTZvcj5Q/compressed-alru.gif",
         weight = 0.2
     ),
     Pony(
