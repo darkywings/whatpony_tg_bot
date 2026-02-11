@@ -4,7 +4,7 @@ class Pony:
     '''Базовый класс с информацией о пони'''
     def __init__(self,
                  name: str,
-                 description: str | list[str],
+                 description: str | list[str] = [],
                  weight: float = 1,
                  image_url: str | list[str] | None = None,
                  message: str | None = None,
@@ -51,10 +51,14 @@ class Pony:
         return self._name
     
     def getDesc(self) -> str:
-        return random.choice(self._description)
+        if not self._disabled:
+            return random.choice(self._description)
+        return None
     
     def getImg(self) -> str:
-        return random.choice(self._image_url)
+        if not self._disabled:
+            return random.choice(self._image_url)
+        return None
     
     def getWeight(self) -> float:
         if self.isDisabled():

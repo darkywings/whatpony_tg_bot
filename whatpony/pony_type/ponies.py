@@ -1026,5 +1026,16 @@ _ponies = [
         ],
         image_url = "https://derpicdn.net/img/2025/9/3/3669664/large.png",
         weight = 0.2
+    ),
+    Pony(
+        name = " CmdrTempest",
+        weight = 0.2,
+        disable = True
+    ),
+    Pony(
+        name = "🥭 Рута",
+        image_url = "",
+        weight = 0.2,
+        disable = True
     )
 ]
