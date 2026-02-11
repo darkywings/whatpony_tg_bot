@@ -1011,4 +1011,12 @@ _ponies = [
         image_url = "https://derpicdn.net/img/2020/12/5/2502593/large.jpg",
         weight = 0.2
     ),
+    Pony(
+        name = "🧐 Драконис",
+        description = [
+            "Отдаст все твои (и свои) деньги за цветную картинку в рамке. ✨🖼",
+        ],
+        image_url = "https://derpicdn.net/img/2025/6/16/3624932/large.png",
+        weight = 0.2
+    )
 ]
