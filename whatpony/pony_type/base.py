@@ -1,10 +1,12 @@
 import random
 
+from utils import validator
+
 class Pony:
     '''Базовый класс с информацией о пони'''
     def __init__(self,
                  name: str,
-                 description: str | list[str] = [],
+                 description: str | list[str] = None,
                  weight: float = 1,
                  image_url: str | list[str] | None = None,
                  message: str | None = None,
@@ -48,28 +50,50 @@ class Pony:
             raise ValueError("weight should be in range [0.001, 100]. For disabling use 'disable' parameter")
 
     def getName(self) -> str:
+        '''
+        Возвращает имя поняшки
+        '''
         return self._name
     
     def getDesc(self) -> str:
-        if not self._disabled:
-            return random.choice(self._description)
-        return None
+        '''
+        Возвращает рандомное описание поняшки из списка
+        '''
+        if self.isDisabled() and validator.is_empty(self._description):
+            return "::PONY_DESCRIPTION::"
+        return random.choice(self._description)
     
     def getImg(self) -> str:
-        if not self._disabled:
-            return random.choice(self._image_url)
-        return None
+        '''
+        Возвращает рандомную ссылку на картинку из списка
+        '''
+        if self.isDisabled() and validator.is_empty(self._image_url):
+            return None
+        return random.choice(self._image_url)
     
     def getWeight(self) -> float:
+        '''
+        Возвращает вес поняшки
+        '''
         if self.isDisabled():
             return 0
         return self._weight
     
     def getMessage(self) -> str:
+        '''
+        Возвращает текст сообщения
+        '''
         return self._message
     
     def isMessageOnly(self) -> bool:
+        '''
+        Указывает является ли пони обычным сообщением или нет
+        '''
         return self._message_only
+
     
     def isDisabled(self) -> bool:
+        '''
+        Указывает является ли пони выключенным
+        '''
         return self._disabled
