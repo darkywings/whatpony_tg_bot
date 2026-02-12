@@ -93,18 +93,6 @@ async def inline_handler(inline_query: InlineQuery):
         await inline_query.answer(result, cache_time=0)
     
 
-async def get_pony(index: str = None):
-
-    _selected_pony = ponyRand.get_pony(index)
-    
-    if isinstance(_selected_pony, Pony):
-        if _selected_pony.isMessageOnly():
-            return (_selected_pony.getMessage(), _selected_pony.getImg())
-        return (f"🎉 Твоя пони-личность: \n{_selected_pony.get()}", _selected_pony.getImg())
-    
-    if isinstance(_selected_pony, str):
-        return (_selected_pony, None)
-
 async def main():
     logger.info(f"Started with total {ponyRand.getTotal()} ponies. {ponyRand.getDisabled()} disabled")
     dp.include_router(router)
