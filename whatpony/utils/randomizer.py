@@ -41,7 +41,7 @@ class PonyRandomizer:
         
         _total_weights = sum(self._weights)
         for _pony in self._ponies:
-            logger.debug(f"Pony<{self._ponies.index(_pony):2}>: {re.sub(r'[^\w\s\.,!?;:\(\)\"\'-]', '', _pony.getName())[:20]:25} "
+            logger.debug(f"Pony<{self._ponies.index(_pony):3}>: {re.sub(r'[^\w\s\.,!?;:\(\)\"\'-]', '', _pony.getName())[:20]:25} "
                          f"{f"Weight: {f"{_pony.getWeight():5.3f}" if not _pony.isDisabled() else "-.---"}":18} "
                          f"{f"Chance: {f"{round(_pony.getWeight() / _total_weights * 100, 3):5.3f}" if not _pony.isDisabled() else "-.---"}%":15} "
                          f"{"[DISABLED]" if _pony.isDisabled() else ""}")
