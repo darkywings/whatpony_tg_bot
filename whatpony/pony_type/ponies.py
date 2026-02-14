@@ -962,7 +962,10 @@ _ponies = [
             "Влюбилась и автоматом оказалась во френдзоне под ногами. 💞🦶",
             "Милая крылатая тряпочка для пыли. 🥰💨",
         ],
-        image_url = "https://d.furaffinity.net/art/darkywings/1735663452/1735663452.darkywings_%D1%81%D1%82%D0%BE%D0%BC%D0%BF_%D0%B4%D0%B0%D1%80%D0%BA%D0%B8_%D1%87%D0%B8%D1%81%D1%82%D0%BE%D0%B5.gif",
+        image_url = [
+            "https://d.furaffinity.net/art/darkywings/1735663452/1735663452.darkywings_%D1%81%D1%82%D0%BE%D0%BC%D0%BF_%D0%B4%D0%B0%D1%80%D0%BA%D0%B8_%D1%87%D0%B8%D1%81%D1%82%D0%BE%D0%B5.gif",
+            "https://derpicdn.net/img/2026/2/12/3763758/large.png",
+        ],
         weight = 0.1
     ),
     Pony(
