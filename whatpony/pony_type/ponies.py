@@ -612,7 +612,7 @@ _ponies = [
         description = [
             "Главный фанат принцессы Луны. 🌙🌚",
         ],
-        image_url = "https://derpicdn.net/img/view/2012/7/3/29502.png",
+        image_url = "https://derpicdn.net/img/view/2013/6/7/342049.gif",
         weight = 0.6
     ),
     Pony(
