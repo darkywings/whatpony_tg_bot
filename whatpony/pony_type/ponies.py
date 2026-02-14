@@ -915,7 +915,8 @@ _ponies = [
             "https://derpicdn.net/img/2023/2/13/3045222/large.png",
             "https://derpicdn.net/img/2024/2/16/3303142/large.png",
             "https://derpicdn.net/img/view/2026/2/3/3758338.gif",
-        ]
+        ],
+        disable = True
     ),
     Pony(
         name = "👁‍🗨 ???",
