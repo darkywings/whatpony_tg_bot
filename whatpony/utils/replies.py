@@ -136,7 +136,7 @@ class BotReplies:
                 title="Произошла ошибка",
                 description="Нажмите сюда, чтобы вывести ошибку и контактную информацию разработчика",
                 input_message_content=InputTextMessageContent(
-                    message_text=f"{hide_link("https://derpicdn.net/img/view/2025/11/20/3715552.gif")}TIMESTAMP: {timestamp}\nUID: {uid}\n\nСвяжитесь с {dev} и передайте ему эту информацию.\nСпасибо ^-^\nИзвините за неудобства",
+                    message_text=f"{hide_link("https://derpicdn.net/img/view/2025/11/20/3715552.gif")}Произошла ошибка :(\n\nДанные ошибки\nTIMESTAMP: {timestamp}\nUID: {uid}\n\nСвяжитесь с {dev} и передайте ему эту информацию.\nСпасибо ^-^\nИзвините за неудобства",
                     parse_mode="HTML"
                 ),
                 thumbnail_url="https://derpicdn.net/img/2021/2/13/2549975/large.png",
